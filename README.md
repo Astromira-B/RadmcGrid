@@ -74,3 +74,6 @@ grid.run(
     optional_params={"plsig1": "-1.0", "plh": "0.1"}
 )
 ```
+
+For more examples and parameter explanations, refer to the [documentation](./RadmcGrid_doc.pdf).
+
