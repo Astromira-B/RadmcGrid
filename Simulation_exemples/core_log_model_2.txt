@@ -1,2 +1,0 @@
-Model_cavity_rout_1.2_rdisk_100_inc_0 (T=[4900.0] K, R=[1.87*rs], L=1.816 L_Sun incl = 0) ran on cores 0-0
-Model_cavity_rout_1.2_rdisk_100_inc_30 (T=[4900.0] K, R=[1.87*rs], L=1.816 L_Sun incl = 30) ran on cores 1-1
