@@ -1,0 +1,10 @@
+istar_sphere = 0
+itempdecoup = 1
+lines_mode = -1
+modified_random_walk = 0
+nphot = 1000000
+nphot_scat = 1000000
+nphot_spec = 10000
+rto_style = 1
+scattering_mode_max = 1
+tgas_eq_tdust = 1
