@@ -1,0 +1,3 @@
+Simulation: Model_cavity_rout_1.2_rdisk_100_inc_0
+rin: 0.04659, rout: 1.2, rdisk: 100, mdisk1: 1e-10, tstar:[4900.0], rstar:[1.87*rs], inc:0, npix:500, sizeau:60, nlmin:8.0, nlmax:13, nlam:11
+core_range: 0-0
