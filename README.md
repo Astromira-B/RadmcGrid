@@ -16,7 +16,7 @@ To run this package, you need the following:
 - `matplotlib`
 - `astropy`
 - `tqdm`
-- `seaborn` *(optional, for nicer plots)*
+- `seaborn` *(for nice SED plots)*
 
 Install the dependencies with:
 
