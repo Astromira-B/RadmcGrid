@@ -752,6 +752,9 @@ def run(
     optional_params_inner=None,
     optional_params_outer=None):
 
+    if isinstance(mdisk1, (list, tuple, np.ndarray)):
+        raise ValueError("Currently, the grid doesn't take a list of values for the inner disk mass.")
+    
     if model == 0:
         if rdisk2 is not None or mdisk2 is not None:
             raise ValueError("Model 0 (continuous disk) does not take 'rdisk2' or 'mdisk2'. Please remove them.")
