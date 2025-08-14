@@ -46,7 +46,7 @@ def Luminosity(Rstar, tstar):
 # continuous disk
 #########################################################################################################################################################################
 #########################################################################################################################################################################
-def nogap(sim_name, rin, rdisk1, mdisk1, output_dir, core_range,
+def nogap(sim_name, rin, rdisk1, mdisk, output_dir, core_range,
           tstar, rstar, inc, npix, sizeau, nlmin, nlmax, nlam, Cdelt3, dpc, composition_name, template_dir,
           optional_params=None):
     if optional_params is None:
@@ -94,7 +94,7 @@ def nogap(sim_name, rin, rdisk1, mdisk1, output_dir, core_range,
     log_path = os.path.join(output_dir, "log.txt")
     with open(log_path, "w") as log_file:
         log_file.write(f"Simulation: {sim_name}\n")
-        log_file.write(f"rin: {rin}, rdisk1: {rdisk1}, mdisk1: {mdisk1}, tstar:{tstar}, rstar:{rstar}, inc:{inc}, npix:{npix}, sizeau:{sizeau}, nlmin:{nlmin}, nlmax:{nlmax}, nlam:{nlam}\n")
+        log_file.write(f"rin: {rin}, rdisk1: {rdisk1}, mdisk1: {mdisk}, tstar:{tstar}, rstar:{rstar}, inc:{inc}, npix:{npix}, sizeau:{sizeau}, nlmin:{nlmin}, nlmax:{nlmax}, nlam:{nlam}\n")
         log_file.write(f"core_range: {core_range}\n")
 
     os.chdir(output_dir)
@@ -122,7 +122,7 @@ def nogap(sim_name, rin, rdisk1, mdisk1, output_dir, core_range,
                                rdisk=str(rdisk1) + '*au',
                                plsig1=plsig1,
                                plh=plh,
-                               mdisk=str(mdisk1) + '*ms',
+                               mdisk=str(mdisk) + '*ms',
                                scattering_mode_max=scattering_mode_max,
                                nphot=nphot,
                                nphot_scat=nphot_scat,
@@ -527,7 +527,7 @@ def gap(sim_name, rin, rdisk1, rout, rdisk2, mdisk1, mdisk2, output_dir, core_ra
 #########################################################################################################################################################################
 #########################################################################################################################################################################
 
-def cavity(sim_name, rin, rout, rdisk, mdisk1, output_dir, core_range,
+def cavity(sim_name, rin, rout, rdisk, mdisk, output_dir, core_range,
            tstar, rstar, inc, npix, sizeau, nlmin, nlmax, nlam, Cdelt3, dpc, composition_name, template_dir,
            optional_params=None):
     if optional_params is None:
@@ -578,7 +578,7 @@ def cavity(sim_name, rin, rout, rdisk, mdisk1, output_dir, core_range,
     log_path = os.path.join(output_dir, "log.txt")
     with open(log_path, "w") as log_file:
         log_file.write(f"Simulation: {sim_name}\n")
-        log_file.write(f"rin: {rin}, rout: {rout}, rdisk: {rdisk}, mdisk1: {mdisk1}, tstar:{tstar}, rstar:{rstar}, inc:{inc}, npix:{npix}, sizeau:{sizeau}, nlmin:{nlmin}, nlmax:{nlmax}, nlam:{nlam}\n")
+        log_file.write(f"rin: {rin}, rout: {rout}, rdisk: {rdisk}, mdisk1: {mdisk}, tstar:{tstar}, rstar:{rstar}, inc:{inc}, npix:{npix}, sizeau:{sizeau}, nlmin:{nlmin}, nlmax:{nlmax}, nlam:{nlam}\n")
         log_file.write(f"core_range: {core_range}\n")
 
     os.chdir(output_dir)
@@ -606,7 +606,7 @@ def cavity(sim_name, rin, rout, rdisk, mdisk1, output_dir, core_range,
                                rdisk=str(rdisk) + '*au',
                                plsig1=plsig1,
                                plh=plh,
-                               mdisk=str(mdisk1) + '*ms',
+                               mdisk=str(mdisk) + '*ms',
                                scattering_mode_max=scattering_mode_max,
                                nphot=nphot,
                                nphot_scat=nphot_scat,
@@ -730,7 +730,6 @@ def cavity(sim_name, rin, rout, rdisk, mdisk1, output_dir, core_range,
 def run(
     model,
     tstar_rstar_list,
-    mdisk1,
     Inc,
     npix,
     sizeau,
@@ -741,35 +740,47 @@ def run(
     dpc,
     composition_name,
     template_dir,
-    rout=None,
-    rdisk2=None,
-    mdisk2=None,
-    rdisk1=None,
-    rdisk=None,
-    total_cores=None,
-    cores_per_sim=1,
-    optional_params=None,
-    optional_params_inner=None,
-    optional_params_outer=None):
+    rout   = None,
+    rdisk2 = None,
+    mdisk2 = None,
+    mdisk1 = None,
+    rdisk1 = None,
+    mdisk  = None,
+    rdisk  = None,
+    total_cores = None,
+    cores_per_sim = 1,
+    optional_params = None,
+    optional_params_inner = None,
+    optional_params_outer = None):
 
-    if isinstance(mdisk1, (list, tuple, np.ndarray)):
-        raise ValueError("Currently, the grid doesn't take a list of values for the inner disk mass.")
+    #if isinstance(mdisk1, (list, tuple, np.ndarray)):
+     #   raise ValueError("Currently, the grid doesn't take a list of values for the inner disk mass.")
+    if isinstance(nlmin, (list, tuple, np.ndarray)):
+        raise ValueError("It is recommended to run one spectral band per simulation to avoid long run times. Please provide a single value for nlmin.")
+    if isinstance(nlmax, (list, tuple, np.ndarray)):
+        raise ValueError("It is recommended to run one spectral band per simulation to avoid long run times. Please provide a single value for nlmax.")
+    if isinstance(Cdelt3, (list, tuple, np.ndarray)):
+        raise ValueError("Cdelt3 takes only one value. Please provide a single value.")
     
     if model == 0:
         if rdisk2 is not None or mdisk2 is not None:
             raise ValueError("Model 0 (continuous disk) does not take 'rdisk2' or 'mdisk2'. Please remove them.")
-        if rdisk1 is None:
-            raise ValueError("Model 0 (continuous disk) requires rdisk1 (outer radius of he disk). Please provide it.")
+        if rdisk is None:
+            raise ValueError("Model 0 (continuous disk) requires rdisk (outer radius of he disk). Please provide it.")
+        if mdisk is None:
+            raise ValueError("Model 0 (continuous disk) requires mdisk (disk mass). Please provide it.")
+            
     elif model == 1:
         if rdisk2 is None or mdisk2 is None or rout is None:
             raise ValueError("Model 1 (gapped disk) requires 'rdisk2', 'mdisk2' and 'rout'. Please provide them.")
+            
     elif model == 2:
         if rdisk2 is not None or mdisk2 is not None:
             raise ValueError("Model 2 (cavity disk) does not take 'rdisk2' or 'mdisk2'. Please remove them.")
         if rout is None:
             raise ValueError("Model 2 (cavity disk) requires 'rout'. Please provide it.")
         if rdisk is None:
-            raise ValueError("Model 2 (cavity disk) requires 'rdisk', please prodvide it.")
+            raise ValueError("Model 2 (cavity disk) requires 'rdisk' (outer radius of he disk), please prodvide it.")
     else:
         raise ValueError("Invalid model. Use 0 for continuous disk, 1 for gapped disk, or 2 for cavity disk.")
 
@@ -781,6 +792,11 @@ def run(
 
     if isinstance(rout, (int, float)):
         rout = [rout]
+        
+    if not isinstance(mdisk1, (list, tuple, np.ndarray)):
+        mdisk1 = [mdisk1]
+    if not isinstance(mdisk, (list, tuple, np.ndarray)):
+        mdisk = [mdisk]
 
     if total_cores is None:
         total_cores = os.cpu_count()
@@ -803,12 +819,12 @@ def run(
         if model == 1:  # GAPPED DISK
             simulations = [
                 (
-                    f"Model_gap_rin_{rin}_rdisk1_{rdisk1}_rout_{rout_val}_inc_{inc}",
+                    f"Model_gap_rin_{rin}_rdisk1_{rdisk1}_rout_{rout_val}_mdisk1_{m1}_inc_{inc}",
                     rin,
                     rdisk1,
                     rout_val,
                     rdisk2,
-                    mdisk1,
+                    m1,
                     mdisk2,
                     inc,
                     npix,
@@ -821,11 +837,11 @@ def run(
                     composition_name,
                     template_dir
                 )
-                for rout_val, rdisk1, inc in product(Out_R, r_lim, Inc)
+                for rout_val, rdisk1, m1, inc in product(Out_R, r_lim, mdisk1, Inc)
                 if rdisk1 < rout_val
             ]
 
-            for sim_name, rin, rdisk1, rout_val, rdisk2, mdisk1, mdisk2, inc, npix, sizeau, nlmin, nlmax, nlam, Cdelt3, dpc, composition_name, template_dir in simulations:
+            for sim_name, rin, rdisk1, rout_val, rdisk2, m1, mdisk2, inc, npix, sizeau, nlmin, nlmax, nlam, Cdelt3, dpc, composition_name, template_dir in simulations:
                 core_start = base_core
                 core_end = (core_start + cores_per_sim - 1) % total_cores
 
@@ -843,7 +859,7 @@ def run(
 
                 sim_params.append((
                     sim_name, rin, rdisk1, rout_val, rdisk2,
-                    mdisk1, mdisk2, output_dir, core_range, tstar, rstar, inc,
+                    m1, mdisk2, output_dir, core_range, tstar, rstar, inc,
                     npix, sizeau, nlmin, nlmax, nlam, Cdelt3, dpc,
                     composition_name, template_dir
                 ))
@@ -857,10 +873,10 @@ def run(
         elif model == 0:  # CONTINUOUS DISK
             simulations = [
                 (
-                    f"Model_nogap_rin_{rin}_rdisk_{rdisk1}_inc_{inc}",
+                    f"Model_nogap_rin_{rin}_rdisk_{rdisk}_mdisk_{m}_inc_{inc}",
                     rin,
-                    rdisk1,
-                    mdisk1,
+                    rdisk,
+                    m,
                     inc,
                     npix,
                     sizeau,
@@ -872,10 +888,10 @@ def run(
                     composition_name,
                     template_dir
                 )
-                for inc in Inc
+                for inc, m in product(Inc, mdisk)
             ]
 
-            for sim_name, rin, rdisk, mdisk1, inc, npix, sizeau, nlmin, nlmax, nlam, Cdelt3, dpc, composition_name, template_dir in simulations:
+            for sim_name, rin, rdisk, m, inc, npix, sizeau, nlmin, nlmax, nlam, Cdelt3, dpc, composition_name, template_dir in simulations:
                 core_start = base_core
                 core_end = (core_start + cores_per_sim - 1) % total_cores
 
@@ -892,7 +908,7 @@ def run(
                 core_range = f"{core_start}-{core_end}"
 
                 sim_params.append((
-                    sim_name, rin, rdisk, mdisk1, output_dir, core_range,
+                    sim_name, rin, rdisk, m, output_dir, core_range,
                     tstar, rstar, inc, npix, sizeau, nlmin, nlmax, nlam, Cdelt3,
                     dpc, composition_name, template_dir
                 ))
@@ -906,11 +922,11 @@ def run(
         elif model == 2:  # CAVITY DISK
             simulations = [
                 (
-                    f"Model_cavity_rout_{rout_val}_rdisk_{rdisk}_inc_{inc}",
+                    f"Model_cavity_rout_{rout_val}_rdisk_{rdisk}_mdisk_{m}_inc_{inc}",
                     rin,
                     rout_val,
                     rdisk,
-                    mdisk1,
+                    m,
                     inc,
                     npix,
                     sizeau,
@@ -922,11 +938,11 @@ def run(
                     composition_name,
                     template_dir
                 )
-                for rout_val, inc in product(Out_R, Inc)
+                for rout_val, m, inc in product(Out_R, mdisk, Inc)
                 
             ]
 
-            for sim_name, rin, rout_val, rdisk, mdisk1, inc, npix, sizeau, nlmin, nlmax, nlam, Cdelt3, dpc, composition_name, template_dir in simulations:
+            for sim_name, rin, rout_val, rdisk, m, inc, npix, sizeau, nlmin, nlmax, nlam, Cdelt3, dpc, composition_name, template_dir in simulations:
                 core_start = base_core
                 core_end = (core_start + cores_per_sim - 1) % total_cores
 
@@ -943,7 +959,7 @@ def run(
                 core_range = f"{core_start}-{core_end}"
 
                 sim_params.append((
-                    sim_name, rin, rout_val, rdisk, mdisk1, output_dir, core_range,
+                    sim_name, rin, rout_val, rdisk, m, output_dir, core_range,
                     tstar, rstar, inc, npix, sizeau, nlmin, nlmax, nlam,
                     Cdelt3, dpc, composition_name, template_dir
                 ))
