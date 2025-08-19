@@ -3,4 +3,4 @@ matplotlib
 tqdm
 astropy
 seaborn
-multiprocessing
+
