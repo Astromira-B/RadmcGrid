@@ -46,7 +46,7 @@ def Luminosity(Rstar, tstar):
 # continuous disk
 #########################################################################################################################################################################
 #########################################################################################################################################################################
-def nogap(sim_name, rin, rdisk1, mdisk, output_dir, core_range,
+def nogap(sim_name, rin, rdisk, mdisk, output_dir, core_range,
           tstar, rstar, inc, npix, sizeau, nlmin, nlmax, nlam, Cdelt3, dpc, composition_name, template_dir,
           optional_params=None):
     if optional_params is None:
@@ -113,13 +113,13 @@ def nogap(sim_name, rin, rdisk1, mdisk, output_dir, core_range,
                                rstar=rstar,
                                nx=nx,
                                nz=nz,
-                               xbound=f'[{str(rin)}*au, {rin_ref}*au, {rdisk1}*au]',
+                               xbound=f'[{str(rin)}*au, {rin_ref}*au, {rdisk}*au]',
                                xres_nstep=xres_nstep,
                                xres_nspan=xres_nspan,
                                xres_nlev=xres_nlev,
                                sigma_type=sigma_type,
                                rin=str(rin) + '*au',
-                               rdisk=str(rdisk1) + '*au',
+                               rdisk=str(rdisk) + '*au',
                                plsig1=plsig1,
                                plh=plh,
                                mdisk=str(mdisk) + '*ms',
