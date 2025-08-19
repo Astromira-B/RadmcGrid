@@ -58,7 +58,7 @@ grid.run(
     model=0,
     tstar_rstar_list=[['4000', '2.0*rs']],
     rdisk=100,
-    mdisk1=1e-3,
+    mdisk=1e-3,
     Inc=[30],
     npix=200,
     sizeau=60,
