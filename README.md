@@ -56,7 +56,7 @@ Each model requires parameters for disk structure, stellar properties, image set
 ``` py
 grid.run(
     model=0,
-    tstar_rstar_list=[['4000', '2.0*rs']],
+    tstar_rstar_list=[('4000', '2.0*rs')],
     rdisk=100,
     mdisk=1e-3,
     Inc=[30],
