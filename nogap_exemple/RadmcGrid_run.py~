@@ -12,7 +12,7 @@ from pathlib import Path
 tstar_rstar_list = [('[4900.0]', '[1.87*rs]')]
 #rout   = 1.2
 rdisk = 100
-mdisk = 1e-10
+mdisk = [1e-10, 1e-5]
 #mdisk2 = 1e-3
 Inc = [0, 30]
 npix = 500

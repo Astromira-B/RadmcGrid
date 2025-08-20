@@ -2,7 +2,3 @@ Model_gap_rin_0.04659_rdisk1_0.23295_rout_1.2_mdisk1_1e-10_inc_0 (T=[4900.0] K, 
 Model_gap_rin_0.04659_rdisk1_0.23295_rout_1.2_mdisk1_1e-10_inc_30 (T=[4900.0] K, R=[1.87*rs], L=1.816 L_Sun incl = 30) ran on cores 1-1
 Model_gap_rin_0.04659_rdisk1_0.4659_rout_1.2_mdisk1_1e-10_inc_0 (T=[4900.0] K, R=[1.87*rs], L=1.816 L_Sun incl = 0) ran on cores 2-2
 Model_gap_rin_0.04659_rdisk1_0.4659_rout_1.2_mdisk1_1e-10_inc_30 (T=[4900.0] K, R=[1.87*rs], L=1.816 L_Sun incl = 30) ran on cores 3-3
-Model_gap_rin_0.04659_rdisk1_0.23295_rout_5_mdisk1_1e-10_inc_0 (T=[4900.0] K, R=[1.87*rs], L=1.816 L_Sun incl = 0) ran on cores 4-4
-Model_gap_rin_0.04659_rdisk1_0.23295_rout_5_mdisk1_1e-10_inc_30 (T=[4900.0] K, R=[1.87*rs], L=1.816 L_Sun incl = 30) ran on cores 5-5
-Model_gap_rin_0.04659_rdisk1_0.4659_rout_5_mdisk1_1e-10_inc_0 (T=[4900.0] K, R=[1.87*rs], L=1.816 L_Sun incl = 0) ran on cores 6-6
-Model_gap_rin_0.04659_rdisk1_0.4659_rout_5_mdisk1_1e-10_inc_30 (T=[4900.0] K, R=[1.87*rs], L=1.816 L_Sun incl = 30) ran on cores 7-7

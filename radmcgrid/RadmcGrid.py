@@ -94,7 +94,7 @@ def nogap(sim_name, rin, rdisk, mdisk, output_dir, core_range,
     log_path = os.path.join(output_dir, "log.txt")
     with open(log_path, "w") as log_file:
         log_file.write(f"Simulation: {sim_name}\n")
-        log_file.write(f"rin: {rin}, rdisk1: {rdisk1}, mdisk1: {mdisk}, tstar:{tstar}, rstar:{rstar}, inc:{inc}, npix:{npix}, sizeau:{sizeau}, nlmin:{nlmin}, nlmax:{nlmax}, nlam:{nlam}\n")
+        log_file.write(f"rin: {rin}, rdisk: {rdisk}, mdisk: {mdisk}, tstar:{tstar}, rstar:{rstar}, inc:{inc}, npix:{npix}, sizeau:{sizeau}, nlmin:{nlmin}, nlmax:{nlmax}, nlam:{nlam}\n")
         log_file.write(f"core_range: {core_range}\n")
 
     os.chdir(output_dir)

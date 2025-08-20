@@ -1,0 +1,96 @@
+###########################################################################################################################
+# RADMC-3D PARAMETER SETUP
+# Created by the python module of RADMC-3D
+###########################################################################################################################
+# -------------------------------------------------------------------------------------------------------------------------
+# Block: Radiation sources
+# -------------------------------------------------------------------------------------------------------------------------
+incl_cont_stellarsrc      = False  # # Switches on (True) or off (False) continuous stellar sources )
+incl_disc_stellarsrc      = True  # # Switches on (True) or off (False) discrete stellar sources)
+mstar                     = [1.0*ms]  # # Mass of the star(s)
+pstar                     = [0.0, 0.0, 0.0]  # # Position of the star(s) (cartesian coordinates)
+rstar                     = [1.87*rs]  # # Radius of the star(s)
+staremis_type             = ["blackbody"]  # # Stellar emission type ("blackbody", "kurucz", "nextgen")
+tstar                     = [4900.0]  # # Effective temperature of the star(s) [K]
+# -------------------------------------------------------------------------------------------------------------------------
+# Block: Grid parameters
+# -------------------------------------------------------------------------------------------------------------------------
+crd_sys                   = 'sph'  # Coordinate system used (car/sph)
+grid_style                = 0  # 0 - Regular grid, 1 - Octree AMR, 10 - Layered/nested grid (not yet supported)
+levelMaxLimit             = 5  # Highest refinement level in octree AMR
+nw                        = [10,40,30,20]  # Number of points in the wavelength grid
+nx                        = [100, 100, 100]  # Number of grid points in the first dimension (to switch off this dimension set it to 0)
+ny                        = [10,30,30,10]  # Number of grid points in the second dimension (to switch off this dimension set it to 0)
+nz                        = 0  # Number of grid points in the third dimension (to switch off this dimension set it to 0)
+wbound                    = [0.1, 1.0, 10., 25., 1e3]  # Boundraries for the wavelength grid
+xbound                    = [0.04659*au, 1.2*au, 1.5*au, 100*au]  # Boundaries for the x grid
+xres_nlev                 = 3  # Number of refinement levels (spherical coordinates only
+xres_nspan                = 3  # Number of the original grid cells to refine (spherical coordinates only)
+xres_nstep                = 3  # Number of grid cells to create in a refinement level (spherical coordinates only)
+ybound                    = [0., pi/3., pi/2., 2.*pi/3., pi]  # Boundaries for the y grid
+zbound                    = [0., 2.0*pi]  # Boundraries for the z grid
+# -------------------------------------------------------------------------------------------------------------------------
+# Block: Dust opacity
+# -------------------------------------------------------------------------------------------------------------------------
+chopforwardt              = 0.0  # If >0 this gives the angle (in degrees from forward) within which the scattering phase function should be kept constant
+dustkappa_ext             = ['full_astrosil_amira']  # 
+errtol                    = 0.01  # Tolerance of the relative difference between kscat and the integral over the zscat Z11 element over angle.
+extrapolate               = True  # If True extrapolates for wavelengths outside the ones covered by the optical constants
+gdens                     = [3.6, 1.8]  # Bulk density of the materials in g/cm^3
+gsdist_powex              = -3.5  # Grain size distribution power exponent
+gsmax                     = 10.0  # Maximum grain size
+gsmin                     = 0.1  # Minimum grain size
+lnk_fname                 = ['/disk2/juhasz/Data/JPDOC/astrosil/astrosil_WD2001_new.lnk']  # 
+logawidth                 = 0  # If >0 the opacity will be averaged over a small sample around the specified grain size, with logawidth being the variance of the Gaussian distribution.
+mixabun                   = [0.75, 0.25]  # Mass fractions of the dust componetns to be mixed
+na                        = 20  # Number of size sampling points (if logawidth set, default
+ngs                       = 1  # Number of grain sizes
+nscatang                  = 180  # Number of scattering angles (only for scattering_mode_max
+verbose                   = False  # If set to True, the code will give some feedback so that one knows what it is doing if it becomes slow.
+wfact                     = 3.0  # Grid width of na sampling points in units of logawidth.
+# -------------------------------------------------------------------------------------------------------------------------
+# Block: Gas line RT
+# -------------------------------------------------------------------------------------------------------------------------
+gasspec_colpart_abun      = [1e0]  # Abundance of the molecule
+gasspec_colpart_name      = ['h2']  # Name of the gas species - the extension of the molecule_EXT.inp file
+gasspec_mol_abun          = [1e-4]  # Abundance of the molecule
+gasspec_mol_dbase_type    = ['leiden']  # leiden or linelist
+gasspec_mol_name          = ['co']  # Name of the gas species - the extension of the molecule_EXT.inp file
+gasspec_vturb             = 0.2e5  # Microturbulence
+# -------------------------------------------------------------------------------------------------------------------------
+# Block: Code parameters
+# -------------------------------------------------------------------------------------------------------------------------
+istar_sphere              = 0  # 1 - take into account the finite size of the star, 0 - take the star to be point-like
+itempdecoup               = 1  # Enable for different dust components to have different temperatures
+lines_mode                = -1  # Line raytracing mode
+modified_random_walk      = 0  # Switched on (1) and off (0) modified random walk
+nphot                     = 1e6  # Nr of photons for the thermal Monte Carlo
+nphot_scat                = 1e6  # Nr of photons for the scattering Monte Carlo (for images)
+nphot_spec                = 10000  # Nr of photons for the scattering Monte Carlo (for spectra)
+rto_style                 = 1  # Format of outpuf files (1-ascii, 2-unformatted f77, 3-binary
+scattering_mode_max       = 1  # 0 - no scattering, 1 - isotropic scattering, 2 - anizotropic scattering
+tgas_eq_tdust             = 1  # Take the dust temperature to identical to the gas temperature
+# -------------------------------------------------------------------------------------------------------------------------
+# Block: Model ppdisk
+# -------------------------------------------------------------------------------------------------------------------------
+bgdens                    = 1e-30  # Background density (g/cm^3)
+dusttogas                 = 0.01  # Dust-to-gas mass ratio
+gap_drfact                = [0e0]  # Density reduction factor in the gap
+gap_rin                   = [0e0*au]  # Inner radius of the gap
+gap_rout                  = [0e0*au]  # Outer radius of the gap
+gasspec_mol_dissoc_taulim = [1.0]  # Continuum optical depth limit below which all molecules dissociate
+gasspec_mol_freezeout_dfact = [1e-3]  # Factor by which the molecular abundance should be decreased in the frezze-out zone
+gasspec_mol_freezeout_temp = [19.0]  # Freeze-out temperature of the molecules in Kelvin
+hpr_prim_rout             = 0.0  # Pressure scale height at rin
+hrdisk                    = 0.1  # Ratio of the pressure scale height over radius at hrpivot
+hrpivot                   = 100.0*au  # Reference radius at which Hp/R is taken
+mdisk                     = 1e-05*ms  # Mass of the disk (either sig0 or mdisk should be set to zero or commented out)
+plh                       = 0  # Flaring index
+plsig1                    = -1  # Power exponent of the surface density distribution as a function of radius
+prim_rout                 = 0.0  # Outer boundary of the puffed-up inner rim in terms of rin
+rdisk                     = 100*au  # Outer radius of the disk
+rin                       = 1.2*au  # Inner radius of the disk
+sig0                      = 0.0  # Surface density at rdisk
+sigma_type                = 0  # Surface density type (0 - polynomial, 1 - exponential outer edge (viscous self-similar solution)
+srim_plsig                = 0.0  # Power exponent of the density reduction inside of srim_rout*rin
+srim_rout                 = 0.0  # Outer boundary of the smoothing in the inner rim in terms of rin

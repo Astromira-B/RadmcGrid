@@ -6,11 +6,11 @@ Created on Tue Jun 24 13:09:23 2025
 @author: abouikni
 """
 
-import RadmcGrid as grid
+import radmcgrid as grid
 from pathlib import Path   
 
 tstar_rstar_list = [('[4900.0]', '[1.87*rs]')]
-rout   = [1.2,5]
+rout   = 1.2
 rdisk2 = 100
 mdisk1 = 1e-10
 mdisk2 = 1e-3

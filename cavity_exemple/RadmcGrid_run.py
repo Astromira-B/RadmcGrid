@@ -6,13 +6,13 @@ Created on Tue Jun 24 13:09:23 2025
 @author: abouikni
 """
 
-import RadmcGrid as grid
+import radmcgrid as grid
 from pathlib import Path   
 
 tstar_rstar_list = [('[4900.0]', '[1.87*rs]')]
 rout   = 1.2
 rdisk = 100
-mdisk = 1e-10
+mdisk = [1e-10, 1e-5]
 #mdisk2 = 1e-3
 Inc = [0, 30]
 npix = 500
@@ -22,7 +22,7 @@ nlmax = 13
 nlam = 11
 Cdelt3 = 0.5
 dpc = 145.0
-template_dir = Path(__file__).parent.parent / "opacities"
+template_dir = Path(__file__).parent.parent.parent/ "opacities"
 
 grid.run(model = 2,
          tstar_rstar_list = tstar_rstar_list, 
