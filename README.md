@@ -23,6 +23,29 @@ Install the dependencies with:
 ```bash
 pip install numpy matplotlib astropy tqdm seaborn
 ```
+### Installation
+
+There are two ways you can install and use **RadmcGrid**:
+
+#### 1. Clone the repository:
+
+```bash
+git clone https://github.com/Astromira-B/RadmcGrid.git
+cd RadmcGrid
+pip install .
+```
+
+#### 2.Install directly via pip without cloning
+
+```bash
+pip install git+https://github.com/Astromira-B/RadmcGrid.git
+```
+
+### Opacity files
+
+If you do not already have opacity files compatible with **RADMC-3D**, this repository provides a folder called **opacities/** containing example opacity tables.
+
+These files are not included in the pip installation and should be copied manually from the repository if needed.
 
 ## Overview
 
@@ -42,7 +65,9 @@ The supported disk models are:
 
 Run simulations for different models using:
 
-  ``` py
+```py
+ import radmcgrid as grid
+ 
 grid.run(model=0, ...)  # Continuous disk
 grid.run(model=1, ...)  # Gapped disk
 grid.run(model=2, ...)  # Cavity disk
