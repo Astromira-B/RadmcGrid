@@ -22,7 +22,7 @@ nlmax = 13
 nlam = 11
 Cdelt3 = 0.5
 dpc = 145.0
-template_dir = Path(__file__).parent.parent.parent/ "opacities"
+template_dir = Path(__file__).parent.parent/ "opacities"
 
 grid.run(model = 2,
          tstar_rstar_list = tstar_rstar_list, 
