@@ -7,7 +7,7 @@ Radiative transfer grid using RADMC-3D for protoplanetary disk simulations.
 To run this package, you need the following:
 
 ### Required Software
-- **RADMC-3D**: Must be installed and accessible in your system PATH. [RADMC-3D Website](https://www.ita.uni-heidelberg.de/~dullemond/software/radmc-3d/)
+- **RADMC-3D**: Latest version must be installed and accessible in your system PATH. [RADMC-3D Website](https://www.ita.uni-heidelberg.de/~dullemond/software/radmc-3d/)
 - **Python 3.7+**
 
 ### Python Packages
@@ -100,5 +100,5 @@ grid.run(
 )
 ```
 
-For more examples and parameter explanations, refer to the [documentation](./RadmcGrid_doc.pdf).
+For more examples and parameter explanations, refer to the [documentation](./RadmcGrid_user_guide.pdf).
 
